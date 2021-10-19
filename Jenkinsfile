@@ -5,6 +5,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
+                sh 'cat /etc/hosts'
                 sh 'uname -a'
             }
         }
