@@ -1,12 +1,10 @@
 pipeline {
-    agent {
-        docker { dockerfile true }
-    }
+    agent { dockerfile true }
     stages {
         stage('Test') {
             steps {
-                sh 'cat /etc/hosts'
                 sh 'uname -a'
+                sh 'checkov --help'
             }
         }
     }
