@@ -1,0 +1,1 @@
+docker run -it -p 12345:5000 check_test:latest
