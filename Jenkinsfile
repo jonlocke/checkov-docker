@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'checkov --help'
+                sh 'ls -l'
             }
         }
     }
