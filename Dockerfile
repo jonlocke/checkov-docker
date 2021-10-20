@@ -94,3 +94,5 @@ RUN mv $HOME/deployments/checkov/checkov-rest/* /app
 RUN rm -rf $HOME/deployments
 
 CMD /app/start-rest.sh 
+
+HEALTHCHECK CMD curl --fail http://localhost:5000 || exit 1
