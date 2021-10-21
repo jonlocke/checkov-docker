@@ -8,7 +8,7 @@ pipeline {
     agent { dockerfile {
         filename 'Dockerfile'
 //        additionalBuildArgs  '--no-cache'
-        label 'check_test'
+//        label 'check_test'
             } 
           }
     stages {
