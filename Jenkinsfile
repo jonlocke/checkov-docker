@@ -1,5 +1,9 @@
 pipeline {
-    agent { dockerfile true }
+    agent { dockerfile {
+        filename 'Dockerfile'
+        additionalBuildArgs  '--no-cache'
+            } 
+          }
     stages {
         stage('IaC Code Scan | Checkov') {
             steps {
