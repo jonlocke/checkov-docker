@@ -95,4 +95,4 @@ RUN rm -rf $HOME/deployments
 
 CMD /app/start-rest.sh 
 
-HEALTHCHECK CMD curl --fail http://localhost:5000 || exit 1
+HEALTHCHECK --interval=90s --timeout=12s --start-period=120s CMD curl --fail http://localhost:5000 || exit 1
