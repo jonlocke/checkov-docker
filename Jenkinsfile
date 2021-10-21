@@ -26,8 +26,7 @@ pipeline {
                     sh  'checkov --version'
                     sh 'uname -a'
                     }
-                }
-            }
-        }
-    }
+             }
+         }
+     }
 }
