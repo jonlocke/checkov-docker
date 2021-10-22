@@ -44,7 +44,7 @@ RUN passwd -d checkov
 
 ENV TZ=America/Chicago
 
-RUN echo "$CACHEBUST"
+RUN echo $CACHEBUST
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN sed -i "s/safe_load/safe_load_all/g" /usr/lib/python3.9/site-packages/checkov/common/checks_infra/registry.py
