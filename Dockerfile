@@ -44,7 +44,10 @@ RUN passwd -d checkov
 
 ENV TZ=America/Chicago
 
+RUN echo "$CACHEBUST"
+
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN sed -i "s/safe_load/safe_load_all" /usr/lib/python3.9/site-packages/checkov/common/checks_infra/registry.py
 
 USER checkov
 
@@ -92,7 +95,6 @@ RUN pip3 install waitress
 RUN cd $HOME && git clone git@github.com:jonlocke/deployments.git
 RUN mv $HOME/deployments/checkov/checkov-rest/* /app
 RUN rm -rf $HOME/deployments
-RUN sed -i 's\/safe_load\/safe_load_all' /usr/lib/python3.9/site-packages/checkov/common/checks_infra/registry.py
 CMD /app/start-rest.sh 
 
 HEALTHCHECK --interval=90s --timeout=12s --start-period=120s CMD curl --fail http://localhost:5000 || exit 1
