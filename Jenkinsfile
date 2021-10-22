@@ -6,7 +6,7 @@ pipeline {
     
     agent { dockerfile {
         filename 'Dockerfile'
-        additionalBuildArgs  '--no-cache'
+//        additionalBuildArgs  '--no-cache'
             } 
           }
     stages {
