@@ -6,7 +6,7 @@ pipeline {
     
     agent { dockerfile {
         filename 'Dockerfile'
-        additionalBuildArgs  "CACHEBUST=${env.BUILD_TAG}"
+        additionalBuildArgs  "--build-arg CACHEBUST=${env.BUILD_TAG}"
             } 
           }
     stages {
