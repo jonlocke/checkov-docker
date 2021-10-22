@@ -20,9 +20,9 @@ RUN apk add musl-dev linux-headers
 
 RUN apk add ansible openssh-client caddy nss-tools sed
 
-RUN pip3 install "ansible-lint[community,yamllint]"
+RUN pip3 install -U checkov hikaru flask
 
- 
+RUN pip3 install "ansible-lint[community,yamllint]"
 
 # Add user checkov
 
@@ -46,8 +46,6 @@ RUN echo $CACHEBUST
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #RUN sed -i "s/safe_load/safe_load_all/g" /usr/lib/python3.9/site-packages/checkov/common/checks_infra/registry.py
-
-RUN pip3 install -U checkov hikaru flask
 
 USER checkov
 
