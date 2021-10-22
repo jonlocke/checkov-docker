@@ -31,7 +31,6 @@ pipeline {
   post {
         always {
             echo 'One way or another, I have finished'
-            manager.build.parent.builds.drop(10).each { it.delete() }
             deleteDir() /* clean up our workspace */
         }
         success {
