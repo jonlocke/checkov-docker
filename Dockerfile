@@ -18,9 +18,9 @@ RUN apk add py3-pip py3-wheel py3-cffi python3-dev py3-setuptools gcc  py3-crypt
 
 RUN apk add musl-dev linux-headers
 
-RUN apk add ansible openssh-client caddy nss-tools sed
-
 RUN pip3 install -U checkov hikaru flask
+
+RUN apk add ansible openssh-client caddy nss-tools sed
 
 RUN pip3 install "ansible-lint[community,yamllint]"
 
