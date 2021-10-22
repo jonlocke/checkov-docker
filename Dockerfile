@@ -1,4 +1,4 @@
-FROM alpine:1.14
+FROM alpine:1.13
 
 RUN apk update 
 
