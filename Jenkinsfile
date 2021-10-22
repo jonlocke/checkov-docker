@@ -27,4 +27,24 @@ pipeline {
              }
          }
      }
+
+  post {
+        always {
+            echo 'One way or another, I have finished'
+            manager.build.parent.builds.drop(10).each { it.delete() }
+            deleteDir() /* clean up our workspace */
+        }
+        success {
+            echo 'I succeeded!'
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            echo 'I failed :('
+        }
+        changed {
+            echo 'Things were different before...'
+        }
+  }
 }
