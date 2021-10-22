@@ -1,14 +1,12 @@
 pipeline {
     environment {
-//      imageName = 'check_test'
       registryCredential = ''
       registryUri = 'http://kube1.local:5000/'
     }
     
     agent { dockerfile {
         filename 'Dockerfile'
-//        additionalBuildArgs  '--no-cache'
-//        label 'check_test'
+        additionalBuildArgs  '--no-cache'
             } 
           }
     stages {
@@ -22,7 +20,7 @@ pipeline {
             steps{
                 script {
                     sh 'ls -l'
-                    sh 'wget -k no http://localhost:5000'
+                    sh 'wget http://localhost:8080'
                     sh  'checkov --version'
                     sh 'uname -a'
                     }
