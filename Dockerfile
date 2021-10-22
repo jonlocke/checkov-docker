@@ -47,9 +47,9 @@ RUN echo $CACHEBUST
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #RUN sed -i "s/safe_load/safe_load_all/g" /usr/lib/python3.9/site-packages/checkov/common/checks_infra/registry.py
 
-USER checkov
-
 RUN pip3 install -U checkov hikaru flask
+
+USER checkov
 
 RUN mkdir ~/.ssh && echo $'-----BEGIN OPENSSH PRIVATE KEY-----\n\
 b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn \n\
