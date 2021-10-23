@@ -20,9 +20,10 @@ pipeline {
         stage('Test Scripts') {
             steps{
                 script {
-                    sh 'ls -l'
-                    sh 'wget http://localhost:8080'
+//                    sh 'ls -l'
+//                    sh 'wget http://localhost:8080'
                     sh  'checkov --version'
+                    sh  'checkov -d test'
                     sh 'uname -a'
                     }
              }
