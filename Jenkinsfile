@@ -24,6 +24,7 @@ pipeline {
 //                    sh 'wget http://localhost:8080'
                     sh  'checkov --version'
                     sh  'checkov -d test'
+                    sh  'checkov -d terragoat
                     sh 'uname -a'
                     }
              }
