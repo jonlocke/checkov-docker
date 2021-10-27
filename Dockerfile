@@ -1,6 +1,6 @@
 FROM alpine:3.13.6
 
-RUN apk update 
+# RUN apk update 
 
 # Software to install from alpine repo
 
