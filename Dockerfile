@@ -6,7 +6,7 @@ FROM alpine:3.12.3
 
 RUN apk upgrade musl
 
-RUN apk update && apk add bash curl python3 py-six git tzdata py3-natsort py3-ldap3 py3-xlsxwriter py3-requests yq jq
+RUN apk update && apk add bash curl python3 py-six git tzdata py3-natsort py3-ldap3 py3-xlsxwriter py3-requests jq
 
 RUN apk add helm --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
