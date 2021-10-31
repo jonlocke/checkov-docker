@@ -20,7 +20,7 @@ RUN apk add musl-dev linux-headers
 
 RUN pip3 install -U checkov hikaru flask
 
-RUN apk add ansible openssh-client caddy nss-tools sed go
+RUN apk add openssh-client caddy nss-tools sed go
 
 RUN pip3 install "ansible-lint[community,yamllint]"
 
