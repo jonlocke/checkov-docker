@@ -2,7 +2,7 @@ FROM alpine:3.12.8
 
 # Software to install from alpine repo
 RUN apk upgrade musl
-RUN apk update && apk add bash curl python3 py-six git tzdata py3-natsort py3-ldap3 py3-xlsxwriter py3-requests jq add py3-pip py3-wheel py3-cffi python3-dev py3-setuptools gcc  py3-cryptography py3-pip py3-wheel py3-cffi python3-dev py3-setuptools gcc  py3-cryptography openssh-client caddy nss-tools sed go
+RUN apk update && apk add bash curl python3 py-six git tzdata py3-natsort py3-ldap3 py3-xlsxwriter py3-requests jq py3-pip py3-wheel py3-cffi python3-dev py3-setuptools gcc  py3-cryptography py3-pip py3-wheel py3-cffi python3-dev py3-setuptools gcc  py3-cryptography openssh-client caddy nss-tools sed go
 RUN apk add helm --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 # Install software using pip3
