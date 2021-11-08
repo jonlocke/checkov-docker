@@ -1,51 +1,22 @@
 FROM alpine:3.12.8
 
-# RUN apk update 
-
 # Software to install from alpine repo
-
 RUN apk upgrade musl
-
-RUN apk update && apk add bash curl python3 py-six git tzdata py3-natsort py3-ldap3 py3-xlsxwriter py3-requests jq
-
+RUN apk update && apk add bash curl python3 py-six git tzdata py3-natsort py3-ldap3 py3-xlsxwriter py3-requests jq add py3-pip py3-wheel py3-cffi python3-dev py3-setuptools gcc  py3-cryptography py3-pip py3-wheel py3-cffi python3-dev py3-setuptools gcc  py3-cryptography openssh-client caddy nss-tools sed go
 RUN apk add helm --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
- 
-
 # Install software using pip3
-
-RUN apk add py3-pip py3-wheel py3-cffi python3-dev py3-setuptools gcc  py3-cryptography
-
-RUN apk add musl-dev linux-headers
-
 RUN pip3 install -U checkov hikaru flask
-
-RUN apk add openssh-client caddy nss-tools sed go
-
-RUN pip3 install "ansible-lint[community,yamllint]"
+RUN pip3 install "ansible-lint[community,yamllint]" waitress
 
 # Add user checkov
-
 RUN addgroup -g 1007 checkov
-
-RUN echo "checkov:x:1007:1007:Linux User,,,:/home/checkov:/bin/bash" >> /etc/passwd
-
-RUN echo "checkov:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow
-
-RUN mkdir /home/checkov && chown checkov: /home/checkov
-RUN mkdir /app && chown checkov: /app
-RUN mkdir /instance && chown checkov: /instance
-
-RUN passwd -d checkov
+RUN echo "checkov:x:1007:1007:Linux User,,,:/home/checkov:/bin/bash" >> /etc/passwd && echo "checkov:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow
+RUN mkdir /home/checkov && chown checkov: /home/checkov && mkdir /app && chown checkov: /app && mkdir /instance && chown checkov: /instance && passwd -d checkov && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Update Timezone
-
 ENV TZ=America/Chicago
-
-RUN echo $CACHEBUST
-
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-#RUN sed -i "s/safe_load/safe_load_all/g" /usr/lib/python3.9/site-packages/checkov/common/checks_infra/registry.py
+# Clone k8split and build it
 RUN git clone https://github.com/brendanjryan/k8split.git && cd k8split && go build -o /bin/k8split && cd .. && rm -rf k8split
 
 USER checkov
@@ -90,10 +61,8 @@ iKxlEWkBReI+EAAAATam9uYXRoYW5sb2NrZUBrdWJlMQ== \n\
 -----END OPENSSH PRIVATE KEY-----' > ~/.ssh/id_rsa && chmod 400 ~/.ssh/id_rsa
 
 RUN git config --global core.sshCommand 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-RUN pip3 install waitress
-RUN cd $HOME && git clone git@github.com:jonlocke/deployments.git
-RUN mv $HOME/deployments/checkov/checkov-rest/* /app
-RUN rm -rf $HOME/deployments
-CMD /app/start-rest.sh 
+RUN cd $HOME && git clone git@github.com:jonlocke/deployments.git && mv $HOME/deployments/checkov/checkov-rest/* /app && rm -rf $HOME/deployments
+
+CMD /app/start-rest.sh
 
 HEALTHCHECK --interval=90s --timeout=12s --start-period=120s CMD curl --fail http://localhost:8080 || exit 1
