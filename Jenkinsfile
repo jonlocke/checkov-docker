@@ -7,7 +7,7 @@ pipeline {
     agent { dockerfile {
         filename 'Dockerfile'
 //        additionalBuildArgs  "--build-arg CACHEBUST=${env.BUILD_TAG}"
-//        additionalBuildArgs  "--no-cache"
+        additionalBuildArgs  "--no-cache"
             } 
           }
     stages {
@@ -22,9 +22,9 @@ pipeline {
                 script {
 //                    sh 'ls -l'
 //                    sh 'wget http://localhost:8080'
-                    sh  'checkov --version'
+//                    sh  'checkov --version'
                     sh  'checkov -d test'
-                    sh  'checkov -d terragoat'
+//                    sh  'checkov -d terragoat'
                     sh 'uname -a'
                     }
              }
