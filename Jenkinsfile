@@ -14,7 +14,6 @@ pipeline {
         stage('Display Version and help') {
             steps {
                 sh 'checkov -v'
-                sh 'checkov -h'
                 ch 'cat /etc/os-release'
             }
         }
