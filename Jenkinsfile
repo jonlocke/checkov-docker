@@ -11,9 +11,10 @@ pipeline {
             } 
           }
     stages {
-        stage('Display Version') {
+        stage('Display Version and help') {
             steps {
-                sh 'vault --version'
+                sh 'checkov -v'
+                sh 'checkov -h'
                 ch 'cat /etc/os-release'
             }
         }
