@@ -65,4 +65,4 @@ RUN cd $HOME && git clone git@github.com:jonlocke/deployments.git && mv $HOME/de
 
 CMD /app/start-rest.sh
 
-# HEALTHCHECK --interval=90s --timeout=12s --start-period=120s CMD curl --fail http://localhost:8080 || exit 1
+HEALTHCHECK --interval=180s --timeout=30s --start-period=240s CMD curl --fail http://localhost:5000 || exit 1
