@@ -11,23 +11,23 @@ pipeline {
             } 
           }
     stages {
-        stage('IaC Code Scan | Checkov') {
+        stage('Display Version') {
             steps {
-//                sh 'tar -cvf /tmp/test.tar Dockerfile'
-//                sh 'tar -tf /tmp/test.tar'
-//                sh 'curl -s -k -X POST -H "Content-Type: multipart/form-data" -F "file=@/tmp/test.tar" https://10.0.0.142:5000/uploader'
-                echo "Hello"
+                sh 'vault --version'
+                ch 'cat /etc/os-release'
             }
         }
-        stage('Test Scripts') {
+        stage('IaC Code Scan ') {
+            steps {
+                sh 'ls -lh'
+                sh 'tar -cvf /tmp/test.tar Dockerfile'
+                sh 'curl -s -k -X POST -H "Content-Type: multipart/form-data" -F "file=@/tmp/test.tar" http://10.0.0.142:5000/uploader'
+            }
+        }
+        stage('Functionality Step') {
             steps{
                 script {
-//                    sh 'ls -l'
-//                    sh 'wget http://localhost:8080'
-//                    sh  'checkov --version'
-                    sh  'checkov -d test'
-//                    sh  'checkov -d terragoat'
-                    sh 'uname -a'
+                    sh  'checkov -d terragoat'
                     }
              }
          }
