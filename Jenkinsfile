@@ -14,7 +14,8 @@ pipeline {
         stage('Display Version and help') {
             steps {
                 sh 'checkov -v'
-                ch 'cat /etc/os-release'
+                sh 'checkov -h'
+                sh 'cat /etc/os-release'
             }
         }
         stage('IaC Code Scan ') {
