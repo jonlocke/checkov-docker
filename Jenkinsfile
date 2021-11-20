@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh 'ls -lh'
                 sh 'tar -cvf /tmp/test.tar Dockerfile'
-                sh 'curl -s -k -X POST -H "Content-Type: multipart/form-data" -F "file=@/tmp/test.tar" http://10.0.0.142:5000/uploader'
+                sh 'curl -s -k -X POST -H "Content-Type: multipart/form-data" -F "file=@/tmp/test.tar" http://checkov.local:5000/uploader'
             }
         }
         stage('Functionality Step') {
